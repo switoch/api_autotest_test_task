@@ -1,32 +1,21 @@
+import config.SetUp;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.lessThan;
 import static org.testng.Assert.assertNotNull;
 
 public class APIGetTest {
     Response response;
-    RequestSpecification request;
-    JSONObject requestParams;
 
     @BeforeClass
     public void setUp() {
-        baseURI = "https://petstore.swagger.io/v2/pet/";
-
-        request = given();
-        requestParams = new JSONObject();
-        requestParams.put("id", "6");
-        requestParams.put("name","linaswitoch");
-        request.body(requestParams);
-        request.post();
+        SetUp.preSetUp();
 
         response = given()
                 .when()
